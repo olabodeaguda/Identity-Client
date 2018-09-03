@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace IdentityClientMiddleware
                 context.Response.ContentType = "application/json";
                 if (responseBody.code != "IDS00")
                 {
+                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                     await context.Response.WriteAsync(JsonConvert.SerializeObject(responseBody,
                         new JsonSerializerSettings()
                         {
