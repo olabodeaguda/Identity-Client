@@ -49,11 +49,11 @@ namespace IdentityClientMiddleware
                     {
                         new ClaimsIdentity(new List<Claim>()
                         {
-                            new Claim(ClaimTypes.NameIdentifier, identityProfile.Id.ToString()),
+                            new Claim(ClaimTypes.NameIdentifier, identityProfile.Id),
                             new Claim(ClaimTypes.Authentication, "true"),
-                            new Claim(ClaimTypes.Email, identityProfile.email),
-                            new Claim(ClaimTypes.MobilePhone, identityProfile.phoneNumber),
-                            new Claim(ClaimTypes.Name, $"{identityProfile.lastName} {identityProfile.otherNames}"),
+                            new Claim(ClaimTypes.Email, string.IsNullOrEmpty(identityProfile.email)?string.Empty:identityProfile.email),
+                            new Claim(ClaimTypes.MobilePhone,string.IsNullOrEmpty(identityProfile.phoneNumber)? string.Empty: identityProfile.phoneNumber),
+                            new Claim(ClaimTypes.Name, $"{identityProfile.lastName} {identityProfile.otherNames??string.Empty}"),
                             new Claim(ClaimTypes.Surname, identityProfile.lastName)
                         },"Basic")
                     };

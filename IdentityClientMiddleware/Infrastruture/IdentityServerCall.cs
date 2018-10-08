@@ -16,7 +16,7 @@ namespace IdentityClientMiddleware.Infrastruture
             try
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                HttpResponseMessage response = await httpClient.GetAsync($"{identityServerUrl}/api/account/v1/profile");
+                HttpResponseMessage response = await httpClient.GetAsync($"{identityServerUrl}");
                 IdentityResponseModel responseBody = await response.Content.ReadAsAsync<IdentityResponseModel>();
                 httpClient.Dispose();
                 return responseBody;
